@@ -1,0 +1,25 @@
+FROM node:12-alpine
+
+# Set app directory
+WORKDIR /app
+
+# Env
+ENV NODE_OPTIONS=--max_old_space_size=4096
+
+# Install dependencies
+COPY package.json ./
+COPY sync-package-lock ./
+
+# Copy app (only files of dockerignore will be ignored)
+COPY . .
+
+RUN npm clean-install
+RUN npm run build
+# # Migration should be here
+# RUN npm run migrate
+
+# Expose app ports. First internal. Second external (exposed)
+EXPOSE 3000
+
+# CMD is not executed in build step
+CMD [ "npm", "run", "serve" ]
