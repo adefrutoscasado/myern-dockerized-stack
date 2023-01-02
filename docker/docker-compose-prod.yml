@@ -1,0 +1,55 @@
+version: '3.4'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'admin'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'psswd'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'psswd'
+    ports:
+      # <Port exposed> : <Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - database-data:/var/lib/mysql/database-data
+  backend:
+    # depends_on:
+    #   - db
+    restart: unless-stopped
+    build:
+      context: ../backend/
+      dockerfile: Dockerfile.prod
+    working_dir: /app
+    environment:
+        - NODE_ENV=development
+        - JWT_SECRET=2599564ff543374468123d9efe7550968e24c71a19df2fb4f207df56e22fa762
+        - REFRESH_JWT_SECRET=b8cd48a75b5face13c3030f28d19628f2cac20e52a4898b0027a976073bfb28f
+    ports:
+        - "3000:3000"
+  frontend:
+    # depends_on:
+    #   - backend
+    restart: unless-stopped
+    build:
+      context: ../frontend/
+      dockerfile: Dockerfile.dev
+      target: build
+    working_dir: /app
+    environment:
+        - NODE_ENV=development
+    volumes:
+        - "../frontend/node_modules:/app/node_modules_for_local_development"
+        - "../frontend/sync-package-lock:/app/sync-package-lock"
+    ports:
+        - "3000:3000"
+# Names our volume
+volumes:
+  database-data:
