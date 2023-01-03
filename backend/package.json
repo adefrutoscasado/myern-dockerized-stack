@@ -14,11 +14,10 @@
     "cors": "^2.8.5",
     "express": "^4.16.1",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.95.10",
-    "ldapjs": "^2.3.1",
+    "knex": "^2.3.0",
     "morgan": "~1.9.1",
-    "objection": "^2.2.15",
-    "pg": "^8.7.1",
+    "mysql2": "2.3.3",
+    "objection": "^3.0.1",
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {

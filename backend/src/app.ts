@@ -7,9 +7,24 @@ import { errorHandler } from './utils'
 import { NotFoundError } from './errors'
 import { PRODUCTION, JWT_SECRET, REFRESH_JWT_SECRET } from './constants'
 import hearbeatRouter from './routes/heartbeat'
+import knex from 'knex'
+import { databaseConfig } from './config'
 
-console.log(`Running in ${PRODUCTION ? 'PRODUCTION' : 'DEVELOPMENT'} mode`)
+// Environment execution info
+console.log(`Running in ${PRODUCTION ? 'PRODUCTION' : 'DEVELOPMENT'} mode\n`)
 
+// Test database connection
+const knexConnection = knex(databaseConfig)
+knexConnection.raw('select 1;')
+  .then(() => {
+    console.log('\nDatabase connection successful\n')
+  })
+  .catch((error) => { 
+    console.error('\nDatabase connection error')
+    console.error(error)
+  })
+
+// Start express app
 const app = express()
 
 app.set('JWT_SECRET', JWT_SECRET)

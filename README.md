@@ -141,6 +141,7 @@ After this, starting the containuer will dump the updated node modules to your l
   - &#x2611; Package version integrity
   - &#x2610; Database migrations
   - &#x2610; Production docker compose
+  - &#x2610; Setup Eslint
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
