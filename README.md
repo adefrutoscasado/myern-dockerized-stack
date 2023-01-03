@@ -81,7 +81,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project implements the main features to deploy a MyERN stack project.
+This project implements the main features to deploy a MyERN stack application.
 
 - No `create-react-app` clones. A minimal webpack config is provided. No hacks to configure!
 - Node modules managed entirely by docker. Package version integrity across developers and environments. Including IDE access to node modules.
@@ -130,7 +130,7 @@ docker-compose -f docker-compose-dev.yml build backend
 docker-compose -f docker-compose-dev.yml build frontend
 ```
 
-This action will dump the generated node modules to your local machine, so your IDE will be able to access it.
+After this, starting the containuer will dump the updated node modules to your local machine, so your IDE will be able to access it.
 
 
 <!-- ROADMAP -->
