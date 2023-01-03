@@ -21,8 +21,8 @@ services:
     volumes:
       - database-data:/var/lib/mysql/database-data
   backend:
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     restart: unless-stopped
     build:
       context: ../backend/

@@ -1,12 +1,14 @@
 
+// TODO: Use env variables 
 export const databaseConfig = {
-    client: 'mysql',
+    client: 'mysql2',
     version: '5.7',
     connection: {
-        host: '127.0.0.1',
+        // mysql database service name
+        host: 'db',
         port: 3306,
-        user: 'psswd',
-        password: 'admin',
-        database: 'app'
+        user: 'admin',
+        password: 'psswd',
+        database: 'db'
     }
 }

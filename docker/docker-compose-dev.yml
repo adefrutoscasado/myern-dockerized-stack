@@ -17,12 +17,12 @@ services:
     expose:
       # Opens port 3306 on the container
       - '3306'
-      # Where our data will be persisted
     volumes:
-      - database-data:/var/lib/mysql/database-data
+      # Where our data will be persisted
+      - db-data:/var/lib/mysql
   backend:
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     restart: unless-stopped
     build:
       context: ../backend/
@@ -58,4 +58,4 @@ services:
     command: "npm run develop"
 # Names our volume
 volumes:
-  database-data:
+  db-data:
