@@ -136,7 +136,7 @@ After this, starting the containuer will dump the updated node modules to your l
 <!-- ROADMAP -->
 ## Roadmap
 
-- &#x2611; Backend
+- &#x2610; Backend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
   - &#x2610; Database migrations
