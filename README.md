@@ -70,9 +70,9 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <!-- <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <!-- <li><a href="#acknowledgments">Acknowledgments</a></li> -->
   </ol>
 </details>
 
@@ -140,9 +140,11 @@ After this, starting the containuer will dump the updated node modules to your l
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
   - &#x2610; Database migrations
+  - &#x2610; Production docker compose
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
+  - &#x2610; Production docker compose
 - &#x2610; Docker registry instructions (Docker versioning)
 - &#x2610; Usage instructions
 
