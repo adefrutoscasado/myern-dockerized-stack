@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Environment: React.FC = () => (
+const Environment = () => (
   <>
-    <h3>Environmental variables:</h3>
+    <h3>Frontend environment variables:</h3>
     <p>
       process.env.PRODUCTION: <b>{process.env.PRODUCTION.toString()}</b>
     </p>
@@ -16,6 +16,6 @@ const Environment: React.FC = () => (
       process.env.VERSION: <b>{process.env.VERSION}</b>
     </p>
   </>
-);
+)
 
 export default Environment

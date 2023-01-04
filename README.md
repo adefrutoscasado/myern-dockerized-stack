@@ -115,9 +115,9 @@ You must have following software installed in your System:
 
     ```sh
     cd myern-dockerized-stack/docker
-    docker-compose -f docker-compose-dev.yml database
-    docker-compose -f docker-compose-dev.yml backend
-    docker-compose -f docker-compose-dev.yml frontend
+    docker-compose -f docker-compose-dev.yml up database
+    docker-compose -f docker-compose-dev.yml up backend
+    docker-compose -f docker-compose-dev.yml up frontend
     ```
 
 

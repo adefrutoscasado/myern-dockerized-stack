@@ -11,18 +11,54 @@ import { useTranslation } from 'react-i18next'
 import Environment from 'components/Environment'
 import { HEARTBEAT } from './api'
 
-const Example = ({
-}) => {
-  const { t } = useTranslation()
+const BackendConnectionTest = () => {
+  const [response, setResponse] = useState(undefined as any)
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
-    fetch(HEARTBEAT)
-  })
+    setIsFetching(true)
+    fetch(HEARTBEAT).then(
+      (response) => response.json()
+    )
+      .then(
+        (response) => setResponse(response),
+        (response) => setResponse(response),
+      ).finally(() =>
+        setIsFetching(false)
+      )
+  }, [])
+
+
 
   return (
-    <Environment />
+    <>
+      <h3>
+        Backend connection test:
+      </h3>
+      <p>
+        {isFetching ?
+          <p>
+            Trying to reach backend...
+          </p>
+          :
+          <>
+            <p>
+              Backend responded with following message:
+            </p>
+            <b>
+              <pre>
+                <code>
+                  {JSON.stringify(response, null, 2)}
+                </code>
+              </pre>
+            </b>
+          </>
+        }
+      </p>
+    </>
   )
 }
+
 
 const App: React.FC = () => {
   // Depends of your implementation of authentication
@@ -35,7 +71,11 @@ const App: React.FC = () => {
           <>
             <Redirect from={'*'} to={ROUTES.ROOT} />
             <Route path={ROUTES.ROOT}>
-              <Example />
+              <>
+                <Environment />
+                <hr className="dotted" />
+                <BackendConnectionTest />
+              </>
             </Route>
           </>
         </Switch>
