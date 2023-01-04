@@ -92,9 +92,6 @@ This project implements the main features to deploy a MyERN stack application.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
 You must have following software installed in your System:
@@ -105,16 +102,23 @@ You must have following software installed in your System:
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repo:
     ```sh
     git clone https://github.com/adefrutoscasado/myern-dockerized-stack.git
     ```
-2. Start the container
+2. Start the container:
     ```sh
     cd myern-dockerized-stack/docker
     docker-compose -f docker-compose-dev.yml up
     ```
+    Or, to keep logs separate, start each service individually in different terminals:
 
+    ```sh
+    cd myern-dockerized-stack/docker
+    docker-compose -f docker-compose-dev.yml database
+    docker-compose -f docker-compose-dev.yml backend
+    docker-compose -f docker-compose-dev.yml frontend
+    ```
 
 
 <!-- USAGE EXAMPLES -->
