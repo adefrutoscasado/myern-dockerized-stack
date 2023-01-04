@@ -4,8 +4,8 @@ export const databaseConfig = {
     client: 'mysql2',
     version: '5.7',
     connection: {
-        // mysql database service name
-        host: 'db',
+        // Docker service called 'database'
+        host: 'database',
         port: 3306,
         user: 'admin',
         password: 'psswd',
