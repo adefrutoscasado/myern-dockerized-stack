@@ -1,6 +1,7 @@
 version: '3.4'
 services:
-  db:
+  # TODO: Change name to dabase so we can identify the declaration in the code
+  database:
     image: mysql:5.7
     restart: always
     environment:
@@ -19,10 +20,10 @@ services:
       - '3306'
     volumes:
       # Where our data will be persisted
-      - db-data:/var/lib/mysql
+      - database-data:/var/lib/mysql
   backend:
     depends_on:
-      - db
+      - database
     restart: unless-stopped
     build:
       context: ../backend/
@@ -58,4 +59,4 @@ services:
     command: "npm run develop"
 # Names our volume
 volumes:
-  db-data:
+  database-data:
