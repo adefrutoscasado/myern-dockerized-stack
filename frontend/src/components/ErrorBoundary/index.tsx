@@ -21,7 +21,7 @@ class ErrorBoundary_ extends Component<{fallback?: ReactNode, t: translate}, {er
   render() {
     if (this.state.error) {
       return (
-        this.props.fallback || <div>There was an error</div>
+        this.props.fallback || <div>{this.props.t('There was an error')}</div>
       )
     }
     return this.props.children
