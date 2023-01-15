@@ -1,5 +1,6 @@
 version: '3.4'
 services:
+  #  TODO: Create production default configuration
   db:
     image: mysql:5.7
     restart: always

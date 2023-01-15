@@ -7,6 +7,7 @@ cp -a /app/node_modules/.bin /app/node_modules_for_local_development/
 # copy package-lock.json to the shared volume "sync-package-lock" so its synced between images an development
 cp -a /app/package-lock.json /app/sync-package-lock/
 
+npm run migrate:latest
 
 echo "Finised docker-entrypoint.sh (backend)"
 
