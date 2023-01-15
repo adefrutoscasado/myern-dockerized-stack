@@ -6,20 +6,28 @@ WORKDIR /app
 # Env
 ENV NODE_OPTIONS=--max_old_space_size=4096
 
-# Install dependencies
+# Copy dependencies files
 COPY package.json ./
 COPY sync-package-lock ./
 
-# Copy app (only files of dockerignore will be ignored)
-COPY . .
-
+# In production, we will use the package lock generated in the development process. No versions surprises.
 RUN npm clean-install
+
+# Copy build files
+COPY nodemon.json ./
+COPY tsconfig.json ./
+COPY src ./src/
+
 RUN npm run build
-# # Migration should be here
-# RUN npm run migrate
 
-# Expose app ports. First internal. Second external (exposed)
-EXPOSE 3000
+# Copy migration files
+COPY database ./
+# This is responsible of copying node_modules and package-lock.json to host machine
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
-# CMD is not executed in build step
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+# CMD is not executed when command is defined in docker compose
 CMD [ "npm", "run", "serve" ]

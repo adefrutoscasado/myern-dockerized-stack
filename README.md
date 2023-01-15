@@ -86,7 +86,7 @@ This project implements the main features to deploy a MyERN stack application.
 - No `create-react-app` clones. A minimal webpack config is provided. No hacks to configure!
 - Node modules managed entirely by docker. Package version integrity across developers and environments. Including IDE access to node modules.
 - Docker versioning for easy deploys and rollbacks.
-
+- Database migrations.
 
 
 <!-- GETTING STARTED -->
@@ -119,6 +119,7 @@ You must have following software installed in your System:
     docker-compose -f docker-compose-dev.yml up backend
     docker-compose -f docker-compose-dev.yml up frontend
     ```
+    Frontend will be served at [localhost:3010](localhost:3010)
 
 
 <!-- USAGE EXAMPLES -->
@@ -136,6 +137,13 @@ docker-compose -f docker-compose-dev.yml build frontend
 
 After this, starting the containuer will dump the updated node modules to your local machine, so your IDE will be able to access it.
 
+- Resetting database:
+
+To reset the database completely use following command (**data will be lost**):
+```
+docker-compose -f docker-compose-dev.yml down -v --remove-orphans
+```
+
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -143,9 +151,10 @@ After this, starting the containuer will dump the updated node modules to your l
 - &#x2610; Backend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
-  - &#x2610; Database migrations
+  - &#x2611; Database migrations
   - &#x2610; Production docker compose
   - &#x2610; Setup Eslint
+  - &#x2610; Create upload file endpoint
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity

@@ -1,6 +1,5 @@
 version: '3.4'
 services:
-  # TODO: Change name to dabase so we can identify the declaration in the code
   database:
     image: mysql:5.7
     restart: always
@@ -30,9 +29,15 @@ services:
       dockerfile: Dockerfile.dev
     working_dir: /app
     environment:
-        - NODE_ENV=development
-        - JWT_SECRET=87e3459aec28ec448228d4f990e80f14657daefc7f01a7146e1149663b30719d
-        - REFRESH_JWT_SECRET=6c2723ab022250723988e5cf38e90908be10e82ee2ce802747d279f4dd7bc823
+        # Depends on 'database' docker service configuration
+        MYSQL_HOST: 'database' # Docker service called 'database'
+        MYSQL_DATABASE: 'db'
+        MYSQL_USER: 'admin'
+        MYSQL_PASSWORD: 'psswd'
+        MYSQL_PORT: '3306'
+        NODE_ENV: development
+        JWT_SECRET: 87e3459aec28ec448228d4f990e80f14657daefc7f01a7146e1149663b30719d
+        REFRESH_JWT_SECRET: 6c2723ab022250723988e5cf38e90908be10e82ee2ce802747d279f4dd7bc823
     volumes:
         - "../backend/node_modules:/app/node_modules_for_local_development"
         - "../backend/sync-package-lock:/app/sync-package-lock"

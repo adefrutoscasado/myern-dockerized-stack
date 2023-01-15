@@ -15,8 +15,11 @@ console.log(`Running in ${PRODUCTION ? 'PRODUCTION' : 'DEVELOPMENT'} mode\n`)
 
 // Test database connection
 const knexConnection = knex(databaseConfig)
-knexConnection.raw('select 1;')
-  .then(() => {
+knexConnection.raw(`
+SHOW TABLES;
+`)
+  .then((data) => {
+    console.log(data[0])
     console.log('\nDatabase connection successful\n')
   })
   .catch((error) => { 
@@ -33,7 +36,7 @@ app.set('REFRESH_JWT_SECRET', REFRESH_JWT_SECRET)
 export const API_PREFIX = '/api'
 
 app.disable('x-powered-by')
-app.use(logger('dev'))
+app.use(logger('dev')) // TODO: Add body
 app.use(cors()) // TODO: Set for development, review for prod
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
