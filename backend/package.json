@@ -7,7 +7,9 @@
     "build": "tsc",
     "develop": "nodemon",
     "serve": "node build/bin/www.js",
-    "migrate:latest": "knex migrate:latest --env database"
+    "migrate:latest": "knex migrate:latest --env database",
+    "eslint-fix": "eslint --fix src/**/*.ts*",
+    "eslint-report": "eslint src/**/* > eslint-report.txt"
   },
   "dependencies": {
     "ajv": "^8.8.1",
@@ -26,9 +28,10 @@
     "@types/jsonwebtoken": "^8.5.6",
     "@types/morgan": "^1.9.3",
     "@types/swagger-ui-express": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.7.0",
-    "eslint-config-airbnb-es5": "^1.2.0",
+    "eslint": "7.32.0",
     "nodemon": "^1.19.0",
     "typescript": "^4.9.3"
   },
