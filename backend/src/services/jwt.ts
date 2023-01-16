@@ -7,19 +7,19 @@ import { UnauthorizedError } from './../errors'
 export const generateAccessToken = (req: Request, payload: any) => {
   return jwt.sign({
     data: payload
-  }, req.app.get('JWT_SECRET'), { expiresIn: '30 mins' });
+  }, req.app.get('JWT_SECRET'), { expiresIn: '30 mins' })
 }
 
 export const generateRefreshToken = (req: Request, payload: any) => {
   return jwt.sign({
     data: payload
-  }, req.app.get('REFRESH_JWT_SECRET'), { expiresIn: '30 days' });
+  }, req.app.get('REFRESH_JWT_SECRET'), { expiresIn: '30 days' })
 }
 
 export const verifyAccessToken = async (req: Request) => {
   const token = getBearerToken(req)
   if (!token) throw new UnauthorizedError(`Token not found in request. Make sure you are providing the token using header 'Authorization: Bearer {{token}}'`)
-  let decoded 
+  let decoded
   try {
     // @ts-ignore
     decoded = await jwtVerify(token, req.app.get('JWT_SECRET'))
@@ -33,7 +33,7 @@ export const verifyAccessToken = async (req: Request) => {
 export const verifyRefreshToken = async (req: Request) => {
   const token = req.body.refresh_token
   if (!token) throw new UnauthorizedError(`Token not found in request. Make sure you are providing the token using body`)
-  let decoded 
+  let decoded
   try {
     // @ts-ignore
     decoded = await jwtVerify(token, req.app.get('REFRESH_JWT_SECRET'))

@@ -1,4 +1,3 @@
-// @ts-ignore
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
@@ -22,7 +21,7 @@ SHOW TABLES;
     console.log(data[0])
     console.log('\nDatabase connection successful\n')
   })
-  .catch((error) => { 
+  .catch((error) => {
     console.error('\nDatabase connection error')
     console.error(error)
   })
