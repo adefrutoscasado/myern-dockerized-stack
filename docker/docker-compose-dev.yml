@@ -65,3 +65,8 @@ services:
 # Names our volume
 volumes:
   database-data:
+  # backend-public:
+  #     driver_opts:
+  #         type: "none"
+  #         device: "${PWD}/data/backend/public"
+  #         o: "bind"
