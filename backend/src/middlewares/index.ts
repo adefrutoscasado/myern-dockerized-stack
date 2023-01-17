@@ -1,7 +1,7 @@
 import {
   errorHandler
 } from './../utils'
-import { BadRequestError, ForbiddenError } from '../errors'
+import { BadRequestError } from '../errors'
 import Ajv from 'ajv'
 import { verifyAccessToken } from '../services/jwt'
 const ajv = new Ajv()
