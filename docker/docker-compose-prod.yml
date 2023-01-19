@@ -1,7 +1,6 @@
 version: '3.4'
 services:
-  #  TODO: Create production default configuration
-  db:
+  database:
     image: mysql:5.7
     restart: always
     environment:
@@ -18,39 +17,46 @@ services:
     expose:
       # Opens port 3306 on the container
       - '3306'
-      # Where our data will be persisted
     volumes:
-      - database-data:/var/lib/mysql/database-data
+      # Where our data will be persisted
+      - database-data:/var/lib/mysql
   backend:
     depends_on:
-      - db
+      - database
     restart: unless-stopped
     build:
       context: ../backend/
       dockerfile: Dockerfile.prod
     working_dir: /app
     environment:
-        - NODE_ENV=development
-        - JWT_SECRET=2599564ff543374468123d9efe7550968e24c71a19df2fb4f207df56e22fa762
-        - REFRESH_JWT_SECRET=b8cd48a75b5face13c3030f28d19628f2cac20e52a4898b0027a976073bfb28f
+        # Depends on 'database' docker service configuration
+        MYSQL_HOST: 'database' # Docker service called 'database'
+        MYSQL_DATABASE: 'db'
+        MYSQL_USER: 'admin'
+        MYSQL_PASSWORD: 'psswd'
+        MYSQL_PORT: '3306'
+        NODE_ENV: production
+        JWT_SECRET: 87e3459aec28ec448228d4f990e80f14657daefc7f01a7146e1149663b30719d
+        REFRESH_JWT_SECRET: 6c2723ab022250723988e5cf38e90908be10e82ee2ce802747d279f4dd7bc823
     ports:
         - "3000:3000"
+    command: "npm run serve"
   frontend:
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
     restart: unless-stopped
     build:
       context: ../frontend/
-      dockerfile: Dockerfile.dev
-      target: build
+      dockerfile: Dockerfile.prod
     working_dir: /app
     environment:
-        - NODE_ENV=development
-    volumes:
-        - "../frontend/node_modules:/app/node_modules_for_local_development"
-        - "../frontend/sync-package-lock:/app/sync-package-lock"
+        NODE_ENV: production
     ports:
-        - "3000:3000"
-# Names our volume
+        - "80:80"
 volumes:
   database-data:
+  # backend-public:
+  #     driver_opts:
+  #         type: "none"
+  #         device: "${PWD}/data/backend/public"
+  #         o: "bind"

@@ -147,12 +147,12 @@ docker-compose -f docker-compose-dev.yml down -v --remove-orphans
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
   - &#x2611; Database migrations
-  - &#x2610; Production docker compose
+  - &#x2611; Production docker compose
   - &#x2610; Create upload file endpoint
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
-  - &#x2610; Production docker compose
+  - &#x2611; Production docker compose
 - &#x2610; Docker registry instructions (Docker versioning)
 - &#x2610; Usage instructions
 
