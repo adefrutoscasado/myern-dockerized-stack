@@ -30,9 +30,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-
-<h3 align="center">MyERN Dockerized Stack</h3>
-    <br />
+  <h2>MyERN Dockerized Stack</h2>
+  <br />
 
 [![Mysql][Mysql]][Mysql-url]
 [![Express][Express]][Express-url]
@@ -40,17 +39,13 @@
 [![Nodejs][Node.js]][Node-url]
 [![Docker][Docker]][Docker-url]
 
-  <p align="center">
-    <br />
-    MySQL, Express, React, Node.js - Dockerized Application Boilerplate
-    <br />
+  <p>
     <br />
     <a href="https://github.com/adefrutoscasado/myern-dockerized-stack/issues">Report Bug</a>
     ·
     <a href="https://github.com/adefrutoscasado/myern-dockerized-stack/issues">Request Feature</a>
   </p>
 </div>
-
 
 
 <!-- TABLE OF CONTENTS -->
