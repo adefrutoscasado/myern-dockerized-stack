@@ -54,7 +54,7 @@ services:
       dockerfile: Dockerfile.dev
     working_dir: /app
     environment:
-        - NODE_ENV=development
+        NODE_ENV: development
     volumes:
         - "../frontend/node_modules:/app/node_modules_for_local_development"
         - "../frontend/sync-package-lock:/app/sync-package-lock"
@@ -62,7 +62,6 @@ services:
     ports:
         - "3010:3010"
     command: "npm run develop"
-# Names our volume
 volumes:
   database-data:
   # backend-public:

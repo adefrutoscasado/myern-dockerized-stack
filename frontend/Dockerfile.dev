@@ -1,24 +1,27 @@
-# dev environment
-FROM node:12-alpine as build
+# Development environment
 
+FROM node:12-alpine
+
+# Do not use 'COPY . .' to copy all files, as some are only needed in the final image.
+# Copying all files will force a build even if no client files have been modified
+
+# Install
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json ./
 COPY sync-package-lock ./
-
-RUN apk add --no-cache python2 make gcc g++
 RUN npm install
-# TODO: Do not use 'COPY . .' to copy all files, as some are only needed in the final image.
-# Copying all files will force a build even if no client files have been modified
+
+# Development server
 COPY src ./src
 COPY public ./public
 COPY .eslintrc.js ./
+COPY tsconfig.json ./
+COPY webpack.config.ts ./
+
+# This is responsible of copying node_modules and package-lock.json to host machine
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-
-# Copy app (only files of dockerignore will be ignored)
-COPY . .
-
 RUN chmod +x /docker-entrypoint.sh
-
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
 CMD [ "npm", "start" ]

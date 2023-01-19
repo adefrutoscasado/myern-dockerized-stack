@@ -28,8 +28,6 @@ const BackendConnectionTest = () => {
       )
   }, [])
 
-
-
   return (
     <>
       <h3>
