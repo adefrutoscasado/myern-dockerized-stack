@@ -20,6 +20,7 @@ docker push ${backend_tag}
 
 cd ../client/
 docker build \
+    # TODO: Define PUBLIC_URL?
     --build-arg PUBLIC_URL=#PUBLIC_URL# \
     -t ${frontend_tag} .
 docker push ${frontend_tag}
