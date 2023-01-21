@@ -1,13 +1,14 @@
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
+import knex from 'knex'
 import cors from 'cors'
 import { errorHandler } from './utils'
 import { NotFoundError } from './errors'
 import { PRODUCTION, JWT_SECRET, REFRESH_JWT_SECRET } from './constants'
-import hearbeatRouter from './routes/heartbeat'
-import knex from 'knex'
+import routes from './routes'
 import { databaseConfig } from './config'
+import HTTP_CODE from './errors/httpCodes'
 
 // Environment execution info
 console.log(`Running in ${PRODUCTION ? 'PRODUCTION' : 'DEVELOPMENT'} mode\n`)
@@ -41,20 +42,27 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(hearbeatRouter)
+app.use('/api', routes)
 
 // 404 Not Found Errors
-app.use(errorHandler((req, res, next) => {
+app.use(errorHandler((req: Request, res: Response, next: NextFunction) => {
   throw new NotFoundError('Endpoint not Found')
 }))
 
+interface ExpressError {
+  status?: number
+  message?: Error['message']
+  stack?: Error['stack']
+  errors?: any
+  additionalInfo?: any
+}
+
 // 500 Internal Errors
-// @ts-ignore
-app.use((err, req, res, next) => {
+app.use((err: ExpressError, req: Request, res: Response, next: NextFunction) => {
   console.log(err.message)
   console.log(err.stack)
-  res.status(err.status || 500)
-  res.send({
+  res.status(err.status || HTTP_CODE.INTERNAL_ERROR)
+  res.json({
     message: (err.status === undefined && PRODUCTION) ? 'Internal error' : err.message,
     errors: err.errors,
     ...(err.additionalInfo || {}),
