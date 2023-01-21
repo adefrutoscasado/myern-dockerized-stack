@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express'
 import cookieParser from 'cookie-parser'
-import logger from 'morgan'
+import morgan from 'morgan'
 import knex from 'knex'
 import cors from 'cors'
 import { errorHandler } from './utils'
@@ -33,37 +33,36 @@ const app = express()
 app.set('JWT_SECRET', JWT_SECRET)
 app.set('REFRESH_JWT_SECRET', REFRESH_JWT_SECRET)
 
-export const API_PREFIX = '/api'
-
 app.disable('x-powered-by')
-app.use(logger('dev')) // TODO: Add body
-app.use(cors()) // TODO: Set for development, review for prod
+app.use(morgan('dev'))
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use('/api', routes)
+export const API_PREFIX = '/api'
+app.use(API_PREFIX, routes)
 
 // 404 Not Found Errors
 app.use(errorHandler((req: Request, res: Response, next: NextFunction) => {
   throw new NotFoundError('Endpoint not Found')
 }))
 
-interface ExpressError {
+interface ExpressError extends Error {
   status?: number
-  message?: Error['message']
-  stack?: Error['stack']
   errors?: any
   additionalInfo?: any
 }
 
 // 500 Internal Errors
 app.use((err: ExpressError, req: Request, res: Response, next: NextFunction) => {
+  const isUnexpectedError = err.status === undefined
   console.log(err.message)
   console.log(err.stack)
   res.status(err.status || HTTP_CODE.INTERNAL_ERROR)
   res.json({
-    message: (err.status === undefined && PRODUCTION) ? 'Internal error' : err.message,
+    // For unexpected errors in production, hide the message since it could contain relevant info
+    message: (isUnexpectedError && PRODUCTION) ? 'Internal error' : err.message,
     errors: err.errors,
     ...(err.additionalInfo || {}),
   })
