@@ -16,7 +16,7 @@ RUN npm clean-install
 # Copy build files
 COPY nodemon.json ./
 COPY tsconfig.json ./
-COPY src ./src/
+COPY src ./src
 
 RUN npm run build
 

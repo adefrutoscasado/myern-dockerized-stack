@@ -16,7 +16,7 @@ RUN npm install
 # Copy build files
 COPY nodemon.json ./
 COPY tsconfig.json ./
-COPY src ./src/
+COPY src ./src
 
 RUN npm run build
 
@@ -25,7 +25,6 @@ COPY database ./
 # This is responsible of copying node_modules and package-lock.json to host machine
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
-
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 

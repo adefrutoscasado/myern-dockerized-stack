@@ -41,6 +41,9 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 export const API_PREFIX = '/api'
+
+app.use(`${API_PREFIX}/public`, express.static('public'))
+app.use(`${API_PREFIX}/uploads`, express.static('uploads'))
 app.use(API_PREFIX, routes)
 
 // 404 Not Found Errors

@@ -42,6 +42,8 @@ services:
         - "../backend/node_modules:/app/node_modules_for_local_development"
         - "../backend/sync-package-lock:/app/sync-package-lock"
         - "../backend/src:/app/src"
+        - "../backend/public:/app/public"
+        - "backend-uploads:/app/uploads"
     ports:
         - "3000:3000"
     command: "npm run develop"
@@ -64,8 +66,4 @@ services:
     command: "npm run develop"
 volumes:
   database-data:
-  # backend-public:
-  #     driver_opts:
-  #         type: "none"
-  #         device: "${PWD}/data/backend/public"
-  #         o: "bind"
+  backend-uploads:

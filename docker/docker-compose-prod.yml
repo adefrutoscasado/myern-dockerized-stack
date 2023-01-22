@@ -38,6 +38,9 @@ services:
         NODE_ENV: production
         JWT_SECRET: 87e3459aec28ec448228d4f990e80f14657daefc7f01a7146e1149663b30719d
         REFRESH_JWT_SECRET: 6c2723ab022250723988e5cf38e90908be10e82ee2ce802747d279f4dd7bc823
+    volumes:
+        - "../backend/public:/app/public"
+        - "backend-uploads:/app/uploads"
     ports:
         - "3000:3000"
     command: "npm run serve"
@@ -55,8 +58,4 @@ services:
         - "80:80"
 volumes:
   database-data:
-  # backend-public:
-  #     driver_opts:
-  #         type: "none"
-  #         device: "${PWD}/data/backend/public"
-  #         o: "bind"
+  backend-uploads:

@@ -9,15 +9,15 @@ const execute = promisify(exec)
 type DestinationCallback = (error: Error | null, destination: string) => void
 type FileNameCallback = (error: Error | null, filename: string) => void
 
-const storage = multer.diskStorage({
+const storage = (destination: string) => multer.diskStorage({
   destination: async function (req: Request, file: Express.Multer.File, callback: DestinationCallback) {
-    const ICONS_FOLDER = `${process.cwd()}/public/upload`
+    const PATH = `uploads${destination}`
     try {
-      await execute(`mkdir ${ICONS_FOLDER}`)
+      await execute(`mkdir ${PATH}`)
     } catch (err) {
       console.log(err)
     }
-    callback(null, ICONS_FOLDER)
+    callback(null, PATH)
   },
   filename: function (req: Request, file: Express.Multer.File, callback: FileNameCallback) {
     const originalName = encodeURIComponent(path.parse(file.originalname).name).replace(/[^a-zA-Z0-9]/g, '')
@@ -27,17 +27,43 @@ const storage = multer.diskStorage({
   }
 })
 
-export const uploadIcon = multer({
-  storage: storage,
-  limits: { fileSize: 1 * 1024 * 1024 }, // 1 Mb
+type AllowedExtensions = string[] | undefined
+type AllowedMimetypes = string[] | undefined
+
+export const upload = (
+  storage: multer.StorageEngine,
+  limits: multer.Options['limits'],
+  allowedExtensions?: AllowedExtensions,
+  allowedMimetypes?: AllowedMimetypes,
+) => multer({
+  storage,
+  limits,
   fileFilter: (req: Request, file: Express.Multer.File, callback: FileFilterCallback) => {
-    const acceptableExtensions = ['png', 'jpg', 'jpeg', 'jpg']
-    if (!(acceptableExtensions.some(extension =>
+    if (allowedExtensions && !(allowedExtensions.some(extension =>
       path.extname(file.originalname).toLowerCase() === `.${extension}`)
     )) {
-      return callback(new BadRequestError(`Extension not allowed, accepted extensions are ${acceptableExtensions.join(', ')}`))
+      return callback(new BadRequestError(`Extension not allowed, accepted extensions are ${allowedExtensions.join(', ')}`))
+    }
+    if (allowedMimetypes && !(allowedMimetypes.includes(file.mimetype))) {
+      return callback(new BadRequestError(`Mimetype not allowed, accepted mimetypes are ${allowedMimetypes.join(', ')}`))
     }
     callback(null, true)
   }
 })
 
+// needs "app.use(bodyParser())" middleware to work
+
+export const uploadMiddleware = ({
+  destination = '',
+  limits = { fileSize: 1 * 1024 * 1024 }, // 1 Mb
+  allowedExtensions = undefined as AllowedExtensions,
+  allowedMimetypes = undefined as AllowedMimetypes,
+}) => {
+  const uploadStorage = storage(destination)
+  return upload(
+    uploadStorage,
+    limits,
+    allowedExtensions,
+    allowedMimetypes
+  )
+}

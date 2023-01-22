@@ -132,11 +132,11 @@ docker-compose -f docker-compose-dev.yml build frontend
 
 After this, starting the containuer will dump the updated node modules to your local machine, so your IDE will be able to access it.
 
-- Resetting database:
+- Resetting the app data:
 
-To reset the database completely use following command (**data will be lost**):
+To reset the database and the upload folders (all volumes) completely use following command (**data will be lost**):
 ```
-docker-compose -f docker-compose-dev.yml down -v --remove-orphans
+docker-compose -f docker-compose-dev.yml down -v
 ```
 
 
@@ -148,7 +148,10 @@ docker-compose -f docker-compose-dev.yml down -v --remove-orphans
   - &#x2611; Package version integrity
   - &#x2611; Production docker compose
   - &#x2611; Database migrations
-  - &#x2610; Create upload file endpoint
+  - &#x2611; Create upload file endpoint
+  - &#x2610; Log management
+  - &#x2610; Instruction to reset database volume
+  - &#x2610; Instruction to reset uploads volume
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
