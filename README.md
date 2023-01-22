@@ -203,8 +203,6 @@ You must have following software installed in your System:
   - &#x2611; Database migrations
   - &#x2611; Create upload file endpoint
   - &#x2610; Log management
-  - &#x2610; Instruction to reset database volume
-  - &#x2610; Instruction to reset uploads volume
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
