@@ -118,26 +118,79 @@ You must have following software installed in your System:
 
 
 <!-- USAGE EXAMPLES -->
-## Usage (under construction)
+## Usage
 
-- Installing a package:
+<details>
+  <summary>Installing a package</summary>
+  <ol>
+  <br />
 
-In order to share a similar environment across team, packages are managed inside the container. This is important, since different machines, node versions or packages can behave differently. Never execute `npm install package` by yourself, since it would be running under your local node installation. Instead, add the package to the `package.json` and then run:
+  In order to share a similar environment across team, packages are managed inside the container. This is important, since different machines, node versions or packages can behave differently. Never execute `npm install package` by yourself, since it would be running under your local node installation. Instead, add the package to the `package.json` and then run:
 
-```bash
-docker-compose -f docker-compose-dev.yml build backend
-# or
-docker-compose -f docker-compose-dev.yml build frontend
-```
+  ```bash
+  docker-compose -f docker-compose-dev.yml build backend
+  # or
+  docker-compose -f docker-compose-dev.yml build frontend
+  ```
 
-After this, starting the containuer will dump the updated node modules to your local machine, so your IDE will be able to access it.
+  After this, starting the containuer will dump the updated node modules to your local machine, so your IDE will be able to access it.
 
-- Resetting the app data:
+  <br />
+  </ol>
+</details>
 
-To reset the database and the upload folders (all volumes) completely use following command (**data will be lost**):
-```
-docker-compose -f docker-compose-dev.yml down -v
-```
+<details>
+  <summary>Erasing all data (uploads folder and database data)</summary>
+  <ol>
+  <br />
+
+  To reset all volumes completely use following command (**data will be lost**):
+  ```
+  docker-compose -f docker-compose-dev.yml down -v
+  ```
+
+  <br />
+  </ol>
+</details>
+
+<details>
+  <summary>Erasing uploads folder</summary>
+  <ol>
+  <br />
+
+  List all volumes using:
+
+  ```bash
+  docker volume ls
+  ```
+  Remove the specified volume using:
+  ```bash
+  docker volume rm docker_backend-uploads
+  ```
+
+  <br />
+  </ol>
+</details>
+
+<details>
+  <summary>Erasing database data</summary>
+  <ol>
+  <br />
+
+  List all volumes using:
+
+  ```bash
+  docker volume ls
+  ```
+  Remove the specified volume using:
+
+  ```bash
+  docker volume rm docker_database-data
+  ```
+
+  <br />
+  </ol>
+</details>
 
 
 <!-- ROADMAP -->
