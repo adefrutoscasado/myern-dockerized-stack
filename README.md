@@ -220,7 +220,7 @@ You must have following software installed in your System:
   - &#x2611; Production docker compose
   - &#x2611; Database migrations
   - &#x2611; Create upload file endpoint
-  - &#x2610; Log management
+  - &#x2611; Log management
 - &#x2610; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
