@@ -192,6 +192,24 @@ You must have following software installed in your System:
   </ol>
 </details>
 
+<details>
+  <summary>Log management</summary>
+  <ol>
+  <br />
+
+  Logs can take up a lot of space on a server's hard drive, which can result in a lack of available space for other important files. By limiting the size of the logs, you can ensure that enough space is available for the necessary files. Following configuration at `docker/docker-compose-prod.yml` sets a maximum of 5 log files with a max size of 10 Mb each. So at most 50 Mb of logs for that container. Tune those numbers as you see fit.
+
+  ```yaml
+  logging:
+    driver: "json-file"
+    options:
+      max-size: "10m"
+      max-file: "5"
+  ```
+
+  <br />
+  </ol>
+</details>
 
 <!-- ROADMAP -->
 ## Roadmap
