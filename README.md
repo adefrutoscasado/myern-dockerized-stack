@@ -79,6 +79,7 @@
 This project implements the main features to deploy a MyERN stack application.
 
 - No `create-react-app` clones. A minimal webpack config is provided. No hacks to configure!
+- Development hot reload for both backend and frontend.
 - Node modules managed entirely by docker. Package version integrity across developers and environments. Including IDE access to node modules.
 - Docker versioning for easy deploys and rollbacks.
 - Database migrations.
@@ -214,14 +215,14 @@ You must have following software installed in your System:
 <!-- ROADMAP -->
 ## Roadmap
 
-- &#x2610; Backend
+- &#x2611; Backend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
   - &#x2611; Production docker compose
   - &#x2611; Database migrations
   - &#x2611; Create upload file endpoint
   - &#x2611; Log management
-- &#x2610; Frontend
+- &#x2611; Frontend
   - &#x2611; Hot reload at development
   - &#x2611; Package version integrity
   - &#x2611; Production docker compose
