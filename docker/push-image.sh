@@ -1,6 +1,9 @@
 #!/bin/bash
 
+# Use: "./push-image.sh develop"
+
 set -x
+# Define your own
 registry="registry_host:registry_port"
 repository="registry_repository_name"
 unset version

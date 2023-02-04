@@ -26,7 +26,6 @@ COPY database ./
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 # CMD is not executed when command is defined in docker compose
