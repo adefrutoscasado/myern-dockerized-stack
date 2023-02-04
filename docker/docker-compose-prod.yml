@@ -44,6 +44,11 @@ services:
     ports:
         - "3000:3000"
     command: "npm run serve"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
   frontend:
     depends_on:
       - backend
@@ -56,6 +61,11 @@ services:
         NODE_ENV: production
     ports:
         - "80:80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
 volumes:
   database-data:
   backend-uploads:
