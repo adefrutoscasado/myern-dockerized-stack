@@ -2,20 +2,20 @@
 // Our 002 version includes the table 'pets'
 
 exports.up = async function (knex) {
-    await knex.raw(`
-        CREATE TABLE pets (
-            id MEDIUMINT NOT NULL AUTO_INCREMENT,
-            name CHAR(30) NOT NULL,
-            person_id INT,
-            PRIMARY KEY (id)
-        );
-    `)
+  await knex.raw(`
+      CREATE TABLE pets (
+          id MEDIUMINT NOT NULL AUTO_INCREMENT,
+          name CHAR(30) NOT NULL,
+          person_id INT,
+          PRIMARY KEY (id)
+      );
+  `)
 }
 
 exports.down = async function (knex) {
-    await knex.raw(`
-        DROP TABLE pets;
-    `)
+  await knex.raw(`
+      DROP TABLE pets;
+  `)
 }
 
 exports.config = { transaction: true }

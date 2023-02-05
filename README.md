@@ -82,7 +82,8 @@ This project implements the main features to deploy a MyERN stack application.
 - Development hot reload for both backend and frontend.
 - Node modules managed entirely by docker. Package version integrity across developers and environments. Including IDE access to node modules.
 - Docker versioning for easy deploys and rollbacks.
-- Database migrations.
+- Endpoint and docker volume to upload files.
+- Database migrations (Optional).
 
 
 <!-- GETTING STARTED -->
@@ -207,6 +208,18 @@ You must have following software installed in your System:
       max-size: "10m"
       max-file: "5"
   ```
+
+  <br />
+  </ol>
+</details>
+
+<details>
+  <summary>Migrations</summary>
+  <ol>
+  <br />
+
+  Migrations are optional. If you prefer to manage dabatase changes manually, just ignore this part.
+  Migrations are configured at `backend/database/migrations` and are managed by [Knex](https://knexjs.org/guide/migrations.html). Two disabled files are included as example. To create a migration, just create a new file using `<filename>.js`. The order of execution of migrations is defined by the filename.
 
   <br />
   </ol>
