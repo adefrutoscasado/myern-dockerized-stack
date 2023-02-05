@@ -9,7 +9,6 @@ WORKDIR /app
 
 # Environment variables
 ENV NODE_OPTIONS=--max_old_space_size=4096
-# TODO: Review following line
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Install
