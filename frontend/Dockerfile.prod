@@ -1,6 +1,6 @@
 # Production environment
 
-FROM node:12-alpine as build
+FROM node:14-alpine as build
 
 # Do not use 'COPY . .' to copy all files. Copying all files will force a build even if no client files have been modified
 

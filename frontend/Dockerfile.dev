@@ -1,6 +1,6 @@
 # Development environment
 
-FROM node:12-alpine
+FROM node:14-alpine
 
 # Do not use 'COPY . .' to copy all files. Copying all files will force a build even if no client files have been modified
 
