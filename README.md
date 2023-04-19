@@ -225,6 +225,24 @@ You must have following software installed in your System:
   </ol>
 </details>
 
+<details>
+  <summary>Pulling changes from original repository</summary>
+  <ol>
+  <br />
+
+  Once you cloned this repository, you can still pull changes from original repository using following steps:
+
+  ```bash
+  git remote add upstream git@github.com:adefrutoscasado/myern-dockerized-stack.git
+  ```
+  ```bash
+  git pull upstream main
+  ```
+
+  <br />
+  </ol>
+</details>
+
 <!-- ROADMAP -->
 ## Roadmap
 
