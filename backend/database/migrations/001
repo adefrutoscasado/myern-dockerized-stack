@@ -3,17 +3,17 @@
 
 exports.up = async function (knex) {
   await knex.raw(`
-      CREATE TABLE persons (
-          id MEDIUMINT NOT NULL AUTO_INCREMENT,
-          name CHAR(30) NOT NULL,
-          PRIMARY KEY (id)
-      );
+    CREATE TABLE persons (
+      id MEDIUMINT NOT NULL AUTO_INCREMENT,
+      name CHAR(30) NOT NULL,
+      PRIMARY KEY (id)
+    );
   `)
 }
 
 exports.down = async function (knex) {
   await knex.raw(`
-      DROP TABLE persons;
+    DROP TABLE persons;
   `)
 }
 

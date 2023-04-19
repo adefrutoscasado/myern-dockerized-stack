@@ -23,7 +23,7 @@ const storage = (destination: string) => multer.diskStorage({
     const originalName = encodeURIComponent(path.parse(file.originalname).name).replace(/[^a-zA-Z0-9]/g, '')
     const timestamp = Date.now()
     const extension = path.extname(file.originalname).toLowerCase()
-    callback(null, originalName + '_' + timestamp + extension)
+    callback(null, `${originalName}_${timestamp}${extension}`)
   }
 })
 
