@@ -3,21 +3,20 @@
 
 exports.up = async function (knex) {
   await knex.raw(`
-    # Use singular names for tablenames
-    CREATE TABLE ingredient (
-      id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-      # VARCHAR(255) and VARCHAR(2) take exactly the same amount of space on disk
-      name VARCHAR(255) NOT NULL UNIQUE
+    CREATE TABLE IF NOT EXISTS ingredient (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL UNIQUE,
+      UNIQUE (name)
     );
-    
-    # Has-many relation
-    CREATE TABLE recipe_ingredient(
-      id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `)
+  await knex.raw(`
+    CREATE TABLE IF NOT EXISTS recipe_ingredient (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      recipe_id INT NOT NULL,
       ingredient_id INT NOT NULL,
-      pet_id INT NOT NULL,
       FOREIGN KEY (recipe_id) REFERENCES recipe(id),
       FOREIGN KEY (ingredient_id) REFERENCES ingredient(id),
-      UNIQUE (ingredient_id, pet_id)
+      UNIQUE (recipe_id, ingredient_id)
     );
   `)
 }
@@ -25,6 +24,8 @@ exports.up = async function (knex) {
 exports.down = async function (knex) {
   await knex.raw(`
     DROP TABLE recipe_ingredient;
+  `)
+  await knex.raw(`
     DROP TABLE ingredient;
   `)
 }

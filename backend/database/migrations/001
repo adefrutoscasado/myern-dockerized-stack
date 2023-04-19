@@ -4,8 +4,8 @@
 exports.up = async function (knex) {
   await knex.raw(`
     # Use singular names for tablenames
-    CREATE TABLE recipe (
-      id MEDIUMINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS recipe (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
       # VARCHAR(255) and VARCHAR(2) take exactly the same amount of space on disk
       name VARCHAR(255) NOT NULL
     );
