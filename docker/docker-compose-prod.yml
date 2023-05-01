@@ -29,9 +29,8 @@ services:
     depends_on:
       - database
     restart: unless-stopped
-    build:
-      context: ../backend/
-      dockerfile: Dockerfile.prod
+    # Use the desired image defined at "pull-and-restart.sh"
+    image: ${registry}/${repository}/${app}-backend:${version}
     working_dir: /app
     environment:
         # Depends on 'database' docker service configuration
@@ -58,9 +57,8 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
-    build:
-      context: ../frontend/
-      dockerfile: Dockerfile.prod
+    # Use the desired image defined at "pull-and-restart.sh"
+    image: ${registry}/${repository}/${app}-frontend:${version}
     working_dir: /app
     environment:
         NODE_ENV: production

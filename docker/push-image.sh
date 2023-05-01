@@ -20,12 +20,12 @@ frontend_tag=${registry}/${repository}/${app}-frontend:${version}
 
 cd ../backend/
 docker build \
+    -f Dockerfile.prod  \
     -t ${backend_tag} .
 docker push ${backend_tag}
 
 cd ../frontend/
 docker build \
-    # TODO: Define PUBLIC_URL?
-    --build-arg PUBLIC_URL=#PUBLIC_URL# \
+    -f Dockerfile.prod  \
     -t ${frontend_tag} .
 docker push ${frontend_tag}
