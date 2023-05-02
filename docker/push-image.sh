@@ -6,7 +6,7 @@
 set -x
 # Define your own
 registry="registry_host:registry_port" # Example: localhost:5000
-repository="registry_repository_name" # Example: raspberry-registry
+repository="registry_repository_name" # Example: machine-repository
 app="app_name" # Example: recipe-app
 unset version
 
